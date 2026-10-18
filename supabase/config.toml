@@ -1,0 +1,4 @@
+[functions.rovers-api]
+# Public registration; protected operations verify opaque sessions in the handler.
+verify_jwt = false
+entrypoint = "./functions/rovers-api/index.ts"

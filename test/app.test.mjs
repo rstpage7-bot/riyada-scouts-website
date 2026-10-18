@@ -10,7 +10,7 @@ export class MemoryStore {
   async list({prefix}){return {blobs:[...this.rows.keys()].filter(k=>k.startsWith(prefix)).map(key=>({key}))};}
   async delete(key){this.rows.delete(key);}
 }
-const origin='https://rst-rovers.netlify.app',code='test-activation-code',password='test-password-only-2026';
+const origin='https://rstpage7-bot.github.io',code='test-activation-code',password='test-password-only-2026';
 function fixture(){let clock=Date.now();const store=new MemoryStore(),app=createApp({store,setupHash:createHash('sha256').update(code).digest('hex'),now:()=>clock});
 const call=async(path,method='GET',body,cookie='',extra={})=>{const res=await app(new Request(origin+'/api'+path,{method,headers:{...(method!=='GET'?{'Content-Type':'application/json',Origin:origin}:{}),...(cookie?{Cookie:cookie}:{}),...extra},body:body===undefined?undefined:JSON.stringify(body)}),{ip:'192.0.2.10'});return {status:res.status,headers:res.headers,body:res.headers.get('content-type')?.includes('json')?await res.json():new Uint8Array(await res.arrayBuffer()),cookie:res.headers.get('set-cookie')?.split(';')[0]};};
 return {call,store,advance:ms=>clock+=ms,setup:()=>call('/admin/setup','POST',{code,password})};}
