@@ -1,0 +1,472 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ar" dir="rtl"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;استطلاع جامعة ريادة - صفحة الهبوط&lt;/title&gt;
+  &lt;style&gt;
+    :root {
+      --navy: #0a1628;
+      --navy-light: #16213e;
+      --gold: #d4a843;
+      --gold-light: #f0d78c;
+      --white: #ffffff;
+      --light-bg: #f8f9fa;
+      --text-dark: #2d2d2d;
+      --text-light: #666;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      direction: rtl;
+      line-height: 1.8;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* Header */
+    header {
+      background: var(--navy);
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon { font-size: 2rem; }
+    nav ul { display: flex; gap: 25px; }
+    nav ul li a {
+      color: var(--white);
+      font-size: 1rem;
+      transition: color 0.3s;
+      padding: 8px 5px;
+    }
+    nav ul li a:hover { color: var(--gold); }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, #0f3460 100%);
+      color: var(--white);
+      padding: 100px 5%;
+      text-align: center;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(212,168,67,0.1) 0%, transparent 50%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--gold);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 35px;
+      color: #c8d6e5;
+      line-height: 1.8;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 40px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,168,67,0.4); }
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      margin-right: 15px;
+    }
+    .btn-outline:hover { background: var(--gold); color: var(--navy); transform: translateY(-3px); }
+
+    /* Sections */
+    section { padding: 80px 5%; }
+    .section-title { text-align: center; margin-bottom: 60px; }
+    .section-title h2 {
+      font-size: 2.4rem;
+      color: var(--navy);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px; right: 0;
+      width: 60%;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .section-title p { color: var(--text-light); font-size: 1.1rem; margin-top: 20px; }
+
+    /* About */
+    .about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-img {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-radius: 20px;
+      padding: 60px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(10,22,40,0.2);
+    }
+    .about-img-icon { font-size: 8rem; }
+    .about-text h3 { font-size: 1.8rem; color: var(--navy); margin-bottom: 20px; }
+    .about-text p { color: #555; line-height: 2; margin-bottom: 15px; font-size: 1.05rem; }
+
+    /* Activities */
+    .activities { background: var(--light-bg); }
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .activity-card {
+      background: var(--white);
+      border-radius: 15px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+    .activity-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(10,22,40,0.15); }
+    .activity-icon { font-size: 4rem; margin-bottom: 20px; }
+    .activity-card h3 { color: var(--navy); font-size: 1.4rem; margin-bottom: 15px; }
+    .activity-card p { color: var(--text-light); line-height: 1.8; }
+
+    /* Join */
+    .join {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: var(--white);
+    }
+    .join .section-title h2 { color: var(--gold); }
+    .join .section-title p { color: #a0b0c0; }
+    .join-content { max-width: 700px; margin: 0 auto; }
+    .join-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    .join-feature {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(255,255,255,0.08);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .join-feature-icon { font-size: 2.5rem; }
+    .join-feature span { font-size: 1.1rem; }
+    .join-btn {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 18px 50px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    .join-btn:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,168,67,0.4); }
+
+    /* Footer */
+    footer {
+      background: var(--navy);
+      color: #a0b0c0;
+      padding: 60px 5% 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+    }
+    .footer-section h3 { color: var(--gold); margin-bottom: 20px; font-size: 1.3rem; }
+    .footer-section p, .footer-section a {
+      color: #8899aa;
+      line-height: 2;
+      display: block;
+      transition: color 0.3s;
+    }
+    .footer-section a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid #1c2a3e;
+      padding-top: 25px;
+      text-align: center;
+      color: #667788;
+    }
+    .contact-links { display: flex; gap: 20px; margin-top: 15px; }
+    .contact-link {
+      width: 45px; height: 45px;
+      background: rgba(212,168,67,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .contact-link:hover { background: var(--gold); transform: translateY(-3px); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .activities-grid { grid-template-columns: 1fr 1fr; }
+      .join-features { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .contact-links { justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      .menu-toggle { display: block; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.1rem; }
+      .activities-grid { grid-template-columns: 1fr; }
+      section { padding: 50px 5%; }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- Header --&gt;
+  &lt;header&gt;
+    &lt;div class="logo"&gt;
+      &lt;span class="logo-icon"&gt;⚜️&lt;/span&gt;
+      &lt;span&gt;استطلاع ريادة&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;nav&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#hero"&gt;الرئيسية&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#about"&gt;عن الاستطلاع&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#activities"&gt;الأنشطة&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#join"&gt;انضم إلينا&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#contact"&gt;تواصل معنا&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+    &lt;button class="menu-toggle" onclick="toggleMenu()"&gt;☰&lt;/button&gt;
+  &lt;/header&gt;
+
+  &lt;!-- Hero Section --&gt;
+  &lt;section class="hero" id="hero"&gt;
+    &lt;div class="hero-content"&gt;
+      &lt;h1&gt;مرحباً بكم في استطلاع جامعة ريادة&lt;/h1&gt;
+      &lt;p&gt;منصة الطلاب المبتكرين والمبدعين في جامعة ريادة. انضم إلينا واكتشف عالمًا من الفرص والأنشطة الشبابية المميزة.&lt;/p&gt;
+      &lt;div&gt;
+        &lt;a href="#join" class="btn btn-gold"&gt;انضم إلينا الآن&lt;/a&gt;
+        &lt;a href="#about" class="btn btn-outline"&gt;اكتشف المزيد&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;!-- About Section --&gt;
+  &lt;section class="about" id="about"&gt;
+    &lt;div class="section-title"&gt;
+      &lt;h2&gt;عن استطلاع جامعة ريادة&lt;/h2&gt;
+      &lt;p&gt;نعمل على تمكين الطلاب وتطوير مهاراتهم من خلال الأنشطة المتنوعة والفعاليات المميزة&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="about-grid"&gt;
+      &lt;div class="about-img"&gt;
+        &lt;div class="about-img-icon"&gt;🎯&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="about-text"&gt;
+        &lt;h3&gt;رؤيتنا وأهدافنا&lt;/h3&gt;
+        &lt;p&gt;تأسس استطلاع جامعة ريادة بهدف توفير بيئة شبابية حافلة بالإنجازات والابتكارات. نسعى لتطوير قدرات الطلاب القيادية والشخصية من خلال مجموعة متنوعة من البرامج والأنشطة.&lt;/p&gt;
+        &lt;p&gt;نؤمن بأن الشباب هم المستقبل، ونحرص على تزويدهم بالأدوات والمهارات اللازمة لتحقيق أحلامهم وبناء مستقبل مشرق.&lt;/p&gt;
+        &lt;p&gt;نوفر فرصًا متنوعة للطلاب لاكتشاف مواهبهم وتطويرها في مجالات مختلفة تشمل العمل التطوعي والابتكار وريادة الأعمال.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;!-- Activities Section --&gt;
+  &lt;section class="activities" id="activities"&gt;
+    &lt;div class="section-title"&gt;
+      &lt;h2&gt;أنشطتنا وفعالياتنا&lt;/h2&gt;
+      &lt;p&gt;اكتشف مجموعة متنوعة من الأنشطة والفعاليات التي نقدمها لطلابنا&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="activities-grid"&gt;
+      &lt;div class="activity-card"&gt;
+        &lt;div class="activity-icon"&gt;🏕️&lt;/div&gt;
+        &lt;h3&gt;الرحلات والمخيمات&lt;/h3&gt;
+        &lt;p&gt;رحلات استكشافية ومخيمات تعليمية في أجواء طبيعية خلابة لتعزيز روح الفريق والعمل الجماعي.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="activity-card"&gt;
+        &lt;div class="activity-icon"&gt;📚&lt;/div&gt;
+        &lt;h3&gt;ورش العمل والتدريبات&lt;/h3&gt;
+        &lt;p&gt;ورش عمل متخصصة وتدريبات عملية في مجالات الابتكار والتكنولوجيا وريادة الأعمال.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="activity-card"&gt;
+        &lt;div class="activity-icon"&gt;🤝&lt;/div&gt;
+        &lt;h3&gt;العمل التطوعي&lt;/h3&gt;
+        &lt;p&gt;مبادرات تطوعية متنوعة تساهم في خدمة المجتمع وتنمية الوعي الاجتماعي بين الشباب.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="activity-card"&gt;
+        &lt;div class="activity-icon"&gt;🏆&lt;/div&gt;
+        &lt;h3&gt;البطولات الرياضية&lt;/h3&gt;
+        &lt;p&gt;بطولات وفعاليات رياضية متنوعة تعزز اللياقة البدنية والروح الرياضية التنافسية.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="activity-card"&gt;
+        &lt;div class="activity-icon"&gt;💡&lt;/div&gt;
+        &lt;h3&gt;مسابقات الابتكار&lt;/h3&gt;
+        &lt;p&gt;مسابقات وتحديات ابتكارية تشجع على التفكير الإبداعي وتقديم حلول مبتكرة.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="activity-card"&gt;
+        &lt;div class="activity-icon"&gt;🎤&lt;/div&gt;
+        &lt;h3&gt;الندوات والمحاضرات&lt;/h3&gt;
+        &lt;p&gt;ندوات ومحاضرات مع خبراء ومتحدثين متخصصين لتوسيع الآفاق المعرفية.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;!-- Join Section --&gt;
+  &lt;section class="join" id="join"&gt;
+    &lt;div class="section-title"&gt;
+      &lt;h2&gt;انضم إلينا اليوم&lt;/h2&gt;
+      &lt;p&gt;كن جزءًا من مجتمعنا المتميز واستفد من الفرص المتاحة&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="join-content"&gt;
+      &lt;div class="join-features"&gt;
+        &lt;div class="join-feature"&gt;
+          &lt;span class="join-feature-icon"&gt;⭐&lt;/span&gt;
+          &lt;span&gt;تنمية المهارات القيادية&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="join-feature"&gt;
+          &lt;span class="join-feature-icon"&gt;🌟&lt;/span&gt;
+          &lt;span&gt;فرص التطور الشخصي&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="join-feature"&gt;
+          &lt;span class="join-feature-icon"&gt;🎓&lt;/span&gt;
+          &lt;span&gt;تدريب مهني متخصص&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="join-feature"&gt;
+          &lt;span class="join-feature-icon"&gt;🎉&lt;/span&gt;
+          &lt;span&gt;فعاليات ومسابقات متنوعة&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;button class="join-btn" onclick="alert('شكرًا لاهتمامك! سيتم التواصل معك قريبًا.')"&gt;سجّل الآن&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;!-- Footer --&gt;
+  &lt;footer id="contact"&gt;
+    &lt;div class="footer-grid"&gt;
+      &lt;div class="footer-section"&gt;
+        &lt;h3&gt;استطلاع ريادة&lt;/h3&gt;
+        &lt;p&gt;منصة الطلاب المبتكرين في جامعة ريادة. نسعى لبناء جيل قيادي مبدع ومتمكن.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="footer-section"&gt;
+        &lt;h3&gt;روابط سريعة&lt;/h3&gt;
+        &lt;a href="#hero"&gt;الرئيسية&lt;/a&gt;
+        &lt;a href="#about"&gt;عن الاستطلاع&lt;/a&gt;
+        &lt;a href="#activities"&gt;الأنشطة&lt;/a&gt;
+        &lt;a href="#join"&gt;انضم إلينا&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="footer-section"&gt;
+        &lt;h3&gt;تواصل معنا&lt;/h3&gt;
+        &lt;p&gt;📧 info@riyada-university.edu&lt;/p&gt;
+        &lt;p&gt;📞 +967-1-234567&lt;/p&gt;
+        &lt;p&gt;📍 شارع الجامعة - صنعاء&lt;/p&gt;
+        &lt;div class="contact-links"&gt;
+          &lt;div class="contact-link" title="فيسبوك"&gt;📘&lt;/div&gt;
+          &lt;div class="contact-link" title="تويتر"&gt;🐦&lt;/div&gt;
+          &lt;div class="contact-link" title="إنستغرام"&gt;📷&lt;/div&gt;
+          &lt;div class="contact-link" title="يوتيوب"&gt;🎬&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="footer-bottom"&gt;
+      &lt;p&gt;&lt;span id="year"&gt;&lt;/span&gt; © استطلاع جامعة ريادة. جميع الحقوق محفوظة.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+
+  &lt;script&gt;
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      var nav = document.querySelector('nav ul');
+      if (nav.style.display === 'flex') {
+        nav.style.display = 'none';
+      } else {
+        nav.style.display = 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.top = '60px';
+        nav.style.right = '0';
+        nav.style.left = '0';
+        nav.style.background = '#0a1628';
+        nav.style.padding = '20px';
+        nav.style.gap = '15px';
+        nav.style.textAlign = 'center';
+      }
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
