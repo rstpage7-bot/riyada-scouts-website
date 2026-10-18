@@ -1,0 +1,13 @@
+{
+  "name": "rst-rovers",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node --check server/app.mjs && node --check public/portal.js && node --check public/app.js",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.4",
+    "netlify-cli": "27.13.0"
+  }
+}
