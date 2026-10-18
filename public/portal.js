@@ -1,8 +1,10 @@
 import { api, request, clearSession } from './api-client.js';
+import { DEMO_MODE } from './config.js';
+import './demo-ui.js';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const labels={pending:'قيد المراجعة',accepted:'تم القبول',declined:'لم يتم القبول'};
 const date=value=>new Date(value).toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'});
-const notice=(text,error=false)=>{const el=$('#notice');el.textContent=text;el.classList.toggle('error',error);el.hidden=false;};
+const notice=(text,error=false)=>{const el=$('#notice');el.textContent=DEMO_MODE&&!error?'في المعاينة فقط — '+text:text;el.classList.toggle('error',error);el.hidden=false;};
 function element(tag,text,cls){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;}
 
 const values=form=>Object.fromEntries(new FormData(form));
@@ -24,7 +26,7 @@ async function showAuth(){
  if(!state.initialized&&!state.setupEnabled)notice('لم يُفعّل المسؤول إعداد الإدارة بعد. سيُتاح الدخول بعد تهيئة رمز التفعيل على الاستضافة.',true);
 }
 function showRecovery(code){if(!code)return;recoveryCode=code;$('#recovery-code').value=code;$('#recovery-result').hidden=false;}
-async function dashboard(){ $('#auth-panel').hidden=true;$('#loading').hidden=true;$('#dashboard').hidden=false;$('#logout').hidden=false;await refresh(); }
+async function dashboard(){ $('#auth-panel').hidden=true;$('#loading').hidden=true;$('#dashboard').hidden=false;$('#logout').hidden=DEMO_MODE;await refresh(); }
 async function refresh(){ const [r,c]=await Promise.all([api('/admin/requests'),api('/admin/content')]);requests=r.requests;news=c.news;photos=c.photos;renderAll(); }
 function filteredRequests(){const query=$('#request-search').value.trim().toLowerCase(),filter=$('#request-filter').value;return requests.filter(r=>(filter==='archived'?r.archived:!r.archived&&(filter==='all'||r.status===filter))&&[r.name,r.email,r.faculty,r.phone].some(x=>x.toLowerCase().includes(query)));}
 function button(text,fn,cls='small-btn'){const b=element('button',text,cls);b.type='button';b.onclick=async()=>{b.disabled=true;try{await fn();}catch(e){notice(e.message,true);if(e.status===401)await showAuth();}finally{b.disabled=false;}};return b;}

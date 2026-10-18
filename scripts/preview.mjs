@@ -22,12 +22,12 @@ http.createServer(async(req,res)=>{
     res.writeHead(response.status,Object.fromEntries(response.headers));res.end(Buffer.from(await response.arrayBuffer()));
   }catch{res.writeHead(500);res.end('Preview error');}
 }).listen(4176,'127.0.0.1');
-const files=new Set(['index.html','membership.html','admin.html','connection.html','style.css','portal.css','camp.svg','app.js','portal.js','api-client.js','connection.js','config.js']);
+const files=new Set(['index.html','membership.html','admin.html','connection.html','style.css','portal.css','camp.svg','app.js','portal.js','api-client.js','connection.js','config.js','demo.js','demo-ui.js']);
 http.createServer(async(req,res)=>{
   const path=new URL(req.url,origin).pathname.replace(/^\/riyada-scouts-website\//,'');
   const file=path||'index.html';if(!files.has(file)){res.writeHead(404);res.end();return;}
   try{
-    const content=file==='config.js'?`export const API_BASE='${apiOrigin}/rovers-api';`:await readFile(new URL('../public/'+file,import.meta.url));
+    const content=file==='config.js'?`export const API_BASE='${apiOrigin}/rovers-api';export const DEMO_MODE=${process.argv.includes('--demo')};`:await readFile(new URL('../public/'+file,import.meta.url));
     res.writeHead(200,{'Content-Type':file.endsWith('.html')?'text/html; charset=utf-8':file.endsWith('.js')?'text/javascript; charset=utf-8':file.endsWith('.css')?'text/css; charset=utf-8':'image/svg+xml','Cache-Control':'no-store'});res.end(content);
   }catch{res.writeHead(404);res.end();}
 }).listen(4175,'127.0.0.1',()=>console.log('Disposable preview: '+origin+'/riyada-scouts-website/'));

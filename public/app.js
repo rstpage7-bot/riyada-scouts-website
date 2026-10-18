@@ -1,4 +1,5 @@
 import { api, mediaURL } from './api-client.js';
+import './demo-ui.js';
 document.getElementById('share').addEventListener('click',async()=>{const status=document.getElementById('share-status');try{await navigator.clipboard.writeText(new URL('./',location.href).href);status.textContent='تم نسخ الرابط';}catch{status.textContent='يمكنك نسخ الرابط من شريط العنوان';}setTimeout(()=>status.textContent='',5000);});
 const make=(tag,text)=>{const el=document.createElement(tag);if(text)el.textContent=text;return el;};
 async function loadContent(){

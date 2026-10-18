@@ -1,4 +1,6 @@
 import { api } from './api-client.js';
+import { DEMO_MODE } from './config.js';
+if(DEMO_MODE){document.querySelector('#result').textContent='هذه نسخة للعرض، ولا توجد خدمة حفظ متصلة حاليًا. سيُتاح اختبار الاتصال بعد الربط.';document.querySelector('#test').disabled=true;}
 document.querySelector('#test').onclick = async event => {
   const button=event.currentTarget, result=document.querySelector('#result');
   button.disabled=true; result.textContent='جارٍ اختبار الاتصال بالخدمة وقاعدة البيانات…';

@@ -1,9 +1,11 @@
-import { API_BASE } from './config.js';
+import { API_BASE, DEMO_MODE } from './config.js';
+import { demoRequest, demoMediaURL } from './demo.js';
 // The admin session stays in this tab's memory and is never put in a URL or disk storage.
 let sessionToken = '';
 export const clearSession = () => { sessionToken = ''; };
-export function mediaURL(id) { return `${API_BASE}/media/${encodeURIComponent(id)}`; }
+export function mediaURL(id) { return DEMO_MODE ? demoMediaURL(id) : `${API_BASE}/media/${encodeURIComponent(id)}`; }
 export async function request(path, options = {}) {
+  if (DEMO_MODE) return demoRequest(path, options);
   if (!API_BASE) throw new Error('يجري تجهيز خدمة التسجيل والإدارة. حاول لاحقًا.');
   const response = await fetch(API_BASE + path, {
     ...options,
