@@ -1,0 +1,1 @@
+document.getElementById('share').addEventListener('click',async()=>{const status=document.getElementById('share-status');try{await navigator.clipboard.writeText(location.href.split('#')[0]);status.textContent='تم نسخ الرابط';}catch{status.textContent='يمكنك نسخ الرابط من شريط العنوان';}setTimeout(()=>status.textContent='',5000);});
